@@ -1,0 +1,39 @@
+{
+  "agent": "market_intelligence",
+  "ticker": "string",
+  "timestamp": "ISO8601 string",
+  "company_profile": {
+    "name": "string",
+    "sector": "string",
+    "industry": "string",
+    "ceo": "string",
+    "employees": "string",
+    "description": "string",
+    "market_cap": "number",
+    "exchange": "string"
+  },
+  "financial_statements": {
+    "income_statement": "object",
+    "balance_sheet": "object",
+    "cash_flow": "object"
+  },
+  "news": [
+    {
+      "title": "string",
+      "source": "string",
+      "published_at": "string",
+      "url": "string"
+    }
+  ],
+  "sources": {
+    "profile_source": "FMP",
+    "financials_source": "yfinance",
+    "news_source": "NewsAPI"
+  },
+  "data_quality": {
+    "profile_fetched": "boolean",
+    "financials_fetched": "boolean",
+    "news_fetched": "boolean",
+    "errors": []
+  }
+}
