@@ -34,9 +34,8 @@ def fetch_company_profile(ticker):
     except Exception as e:
         return None, False, str(e)
 
-
 def fetch_financial_statements(ticker):
-    """Fetch financial statements from yfinance. Returns (data, success, error)."""
+    """Fetch financial statements from yfinance, keeping 2 periods for YoY comparison."""
     try:
         stock = yf.Ticker(ticker)
 
@@ -47,18 +46,28 @@ def fetch_financial_statements(ticker):
         if income_stmt is None or income_stmt.empty:
             return None, False, "No income statement data available"
 
-        # Convert to dict, keeping only most recent period for now
-        statements = {
-            "income_statement": income_stmt.iloc[:, 0].to_dict() if not income_stmt.empty else {},
-            "balance_sheet": balance_sheet.iloc[:, 0].to_dict() if not balance_sheet.empty else {},
-            "cash_flow": cash_flow.iloc[:, 0].to_dict() if not cash_flow.empty else {}
-        }
-
-        # Convert Timestamp keys/values to strings for JSON serialization
         def clean_dict(d):
             return {str(k): (float(v) if v is not None and str(v) != 'nan' else None) for k, v in d.items()}
 
-        statements = {k: clean_dict(v) for k, v in statements.items()}
+        def get_period(df, index):
+            if df is None or df.empty or index >= df.shape[1]:
+                return {}
+            return clean_dict(df.iloc[:, index].to_dict())
+
+        statements = {
+            "income_statement": {
+                "current_period": get_period(income_stmt, 0),
+                "prior_period": get_period(income_stmt, 1)
+            },
+            "balance_sheet": {
+                "current_period": get_period(balance_sheet, 0),
+                "prior_period": get_period(balance_sheet, 1)
+            },
+            "cash_flow": {
+                "current_period": get_period(cash_flow, 0),
+                "prior_period": get_period(cash_flow, 1)
+            }
+        }
 
         return statements, True, None
     except Exception as e:
