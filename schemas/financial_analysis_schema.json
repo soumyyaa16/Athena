@@ -1,0 +1,21 @@
+{
+  "agent": "financial_analysis",
+  "ticker": "string",
+  "timestamp": "ISO8601 string",
+  "metrics": {
+    "roe": "number | null",
+    "gross_margin": "number | null",
+    "operating_margin": "number | null",
+    "net_margin": "number | null",
+    "roic": "number | null",
+    "current_ratio": "number | null",
+    "debt_to_equity": "number | null",
+    "revenue_growth": "number | null",
+    "free_cash_flow": "number | null"
+  },
+  "method": "deterministic_calculation",
+  "data_quality": {
+    "calculation_complete": "boolean",
+    "errors": ["string"]
+  }
+}

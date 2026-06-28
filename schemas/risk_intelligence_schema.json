@@ -1,0 +1,22 @@
+{
+  "agent": "risk_intelligence",
+  "ticker": "string",
+  "timestamp": "ISO8601 string",
+  "overall_risk_level": "low | moderate | elevated",
+  "risk_flags": [
+    {
+      "risk_type": "liquidity_risk | leverage_risk | profitability_risk | growth_risk | cash_flow_risk | news_signal",
+      "severity": "high | moderate | informational",
+      "evidence": "string",
+      "metric": "string (optional, not present for news_signal)",
+      "value": "number (optional, not present for news_signal)",
+      "flagged_headlines": ["string"],
+      "note": "string (optional)"
+    }
+  ],
+  "method": "rule_based_thresholds",
+  "data_quality": {
+    "flags_generated": "number",
+    "errors": ["string"]
+  }
+}
