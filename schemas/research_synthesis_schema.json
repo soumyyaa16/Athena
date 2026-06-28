@@ -1,0 +1,16 @@
+{
+  "agent": "research_synthesis",
+  "ticker": "string",
+  "timestamp": "ISO8601 string",
+  "synthesis": "string (contains CATALYSTS/OPPORTUNITIES/THREATS sections)",
+  "inputs_used": {
+    "metrics_provided": ["string"],
+    "risk_flags_provided": "number",
+    "news_headlines_provided": "number"
+  },
+  "method": "llm_synthesis_constrained",
+  "data_quality": {
+    "synthesis_generated": "boolean",
+    "errors": ["string"]
+  }
+}
