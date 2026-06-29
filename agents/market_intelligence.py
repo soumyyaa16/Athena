@@ -1,3 +1,6 @@
+import sys
+sys.path.append(".")
+from core.fallback import with_retry
 import os
 import requests
 import yfinance as yf
@@ -9,7 +12,7 @@ load_dotenv()
 NEWS_API_KEY = os.getenv("NEWS_API_KEY")
 FMP_API_KEY = os.getenv("FMP_API_KEY")
 
-
+@with_retry(max_attempts=3, base_delay=2)
 def fetch_company_profile(ticker):
     """Fetch company profile from FMP. Returns (data, success, error)."""
     try:
@@ -34,6 +37,7 @@ def fetch_company_profile(ticker):
     except Exception as e:
         return None, False, str(e)
 
+@with_retry(max_attempts=3, base_delay=2)
 def fetch_financial_statements(ticker):
     """Fetch financial statements from yfinance, keeping 2 periods for YoY comparison."""
     try:
@@ -73,7 +77,7 @@ def fetch_financial_statements(ticker):
     except Exception as e:
         return None, False, str(e)
 
-
+@with_retry(max_attempts=3, base_delay=2)
 def fetch_news(ticker, company_name=None, page_size=10):
     """Fetch recent news from NewsAPI. Returns (data, success, error)."""
     try:
@@ -157,4 +161,4 @@ def run_market_intelligence(ticker):
 if __name__ == "__main__":
     import json
     result = run_market_intelligence("AAPL")
-    print(json.dumps(result, indent=2, default=str))
+    print(json.dumps(result, indent=2, default=str)) 
