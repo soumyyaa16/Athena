@@ -1,0 +1,26 @@
+{
+  "agent": "investment_committee",
+  "ticker": "string",
+  "timestamp": "ISO8601 string",
+  "overall_score": "number (0-100) | null",
+  "classification": "strong_fundamentals | stable_fundamentals | mixed_fundamentals | weak_fundamentals | insufficient_data",
+  "dimension_scores": {
+    "profitability": "number | null",
+    "financial_health": "number | null",
+    "growth": "number | null",
+    "risk": "number | null"
+  },
+  "weights": {
+    "profitability": "number",
+    "financial_health": "number",
+    "growth": "number",
+    "risk": "number"
+  },
+  "committee_summary": "string",
+  "requires_human_approval": true,
+  "method": "weighted_deterministic_scoring_with_llm_explanation",
+  "data_quality": {
+    "score_calculated": "boolean",
+    "errors": ["string"]
+  }
+}
