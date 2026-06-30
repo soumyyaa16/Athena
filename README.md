@@ -83,16 +83,16 @@ Athena's six-stage lifecycle is modeled as a published UiPath Maestro Case app (
 ## UiPath Components Used
 
 - **UiPath Maestro Case** — Athena's full 6-stage case lifecycle (Market Intelligence → Financial Analysis → Risk Intelligence → Research Synthesis → Investment Committee → Human Approval) is modeled and published as a Maestro Case app, built in UiPath Studio Web on UiPath Automation Cloud.
-- **UiPath Automation Cloud** — hosting environment for the published Case app and sandbox used during development.
+- **UiPath Automation Cloud** hosting environment for the published Case app and sandbox used during development.
 
 ## Agent Type
 
-Athena's five analysis agents (Market Intelligence, Financial Analysis, Risk Intelligence, Research Synthesis, Investment Committee) are **coded agents** — implemented as standalone Python modules with explicit logic, deterministic calculations, and constrained LLM calls (Gemini 2.5 Flash) where reasoning is required. They are not built using UiPath's low-code Agent Builder; the orchestration layer and case lifecycle they map onto is UiPath Maestro Case.
+Athena's five analysis agents (Market Intelligence, Financial Analysis, Risk Intelligence, Research Synthesis, Investment Committee) are **coded agents**  implemented as standalone Python modules with explicit logic, deterministic calculations, and constrained LLM calls (Gemini 2.5 Flash) where reasoning is required. They are not built using UiPath's low-code Agent Builder; the orchestration layer and case lifecycle they map onto is UiPath Maestro Case.
 
 ## Setup Instructions (for Judging)
 
-1. **Live demo:** visit the deployed site at `<your Render URL>` — no setup required. Enter a ticker (e.g. `AAPL`, `TSLA`) and run an analysis.
-2. **UiPath Maestro Case:** the published case plan can be viewed in UiPath Studio Web under the "Athena" solution — 6 stages, each mapped to one pipeline agent plus human approval.
+1. **Live demo:** visit the deployed site at `<your Render URL>`  no setup required. Enter a ticker (e.g. `AAPL`, `TSLA`) and run an analysis.
+2. **UiPath Maestro Case:** the published case plan can be viewed in UiPath Studio Web under the "Athena" solution 6 stages, each mapped to one pipeline agent plus human approval.
 3. **To run locally:**
    ```bash
    git clone https://github.com/soumyyaa16/Athena.git
