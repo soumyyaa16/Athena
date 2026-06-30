@@ -3,7 +3,7 @@
 ### Enterprise Multi-Agent Investment Intelligence Platform 
 
  An enterprise-grade, multi-agent investment intelligence platform that combines deterministic financial analysis, explainable AI reasoning, and human approval into a single auditable workflow.
- 
+
 > **Not another chatbot.**
 >
 > Athena separates retrieval, computation, reasoning, and approval into specialized AI agents ensuring every investment recommendation is explainable, evidence-backed, and reviewed by a human before action.
@@ -79,6 +79,42 @@ Most "AI investment assistant" projects let one LLM call do everything — fetch
 Athena's six-stage lifecycle is modeled as a published UiPath Maestro Case app (Track 1), mapping 1:1 onto the agent pipeline:
 
 `Market Intelligence → Financial Analysis → Risk Intelligence → Research Synthesis → Investment Committee → Human Approval`
+
+## UiPath Components Used
+
+- **UiPath Maestro Case** — Athena's full 6-stage case lifecycle (Market Intelligence → Financial Analysis → Risk Intelligence → Research Synthesis → Investment Committee → Human Approval) is modeled and published as a Maestro Case app, built in UiPath Studio Web on UiPath Automation Cloud.
+- **UiPath Automation Cloud** — hosting environment for the published Case app and sandbox used during development.
+
+## Agent Type
+
+Athena's five analysis agents (Market Intelligence, Financial Analysis, Risk Intelligence, Research Synthesis, Investment Committee) are **coded agents** — implemented as standalone Python modules with explicit logic, deterministic calculations, and constrained LLM calls (Gemini 2.5 Flash) where reasoning is required. They are not built using UiPath's low-code Agent Builder; the orchestration layer and case lifecycle they map onto is UiPath Maestro Case.
+
+## Setup Instructions (for Judging)
+
+1. **Live demo:** visit the deployed site at `<your Render URL>` — no setup required. Enter a ticker (e.g. `AAPL`, `TSLA`) and run an analysis.
+2. **UiPath Maestro Case:** the published case plan can be viewed in UiPath Studio Web under the "Athena" solution — 6 stages, each mapped to one pipeline agent plus human approval.
+3. **To run locally:**
+   ```bash
+   git clone https://github.com/soumyyaa16/Athena.git
+   cd Athena
+   pip install -r requirements.txt
+   ```
+   Create a `.env` file in the root with:
+   ```
+   NEWS_API_KEY=your_key
+   FMP_API_KEY=your_key
+   GEMINI_API_KEY=your_key
+   ```
+   Then run:
+   ```bash
+   python app.py
+   ```
+   Visit `http://localhost:5000`.
+4. **To run the pipeline directly (no UI):**
+   ```bash
+   python orchestrator.py AAPL
+   ```
+   Prints full agent output and saves a complete audit-trail JSON to `outputs/`. 
 
 This gives Athena's case lifecycle the same orchestration, stage tracking, and human-in-the-loop case management that UiPath Maestro provides for real enterprise workflows rather than a single opaque script.
 
@@ -186,4 +222,4 @@ Athena/
 
 **Soumya Singh**
 
-Built independently for UiPath AgentHack 2026, demonstrating enterprise-grade multi-agent orchestration, explainable AI, and human-in-the-loop investment decision support.
+Built independently for UiPath AgentHack 2026, demonstrating enterprise-grade multi-agent orchestration, explainable AI, and human-in-the-loop investment decision support. 
